@@ -92,7 +92,7 @@ public class QueenBoard{
 	}
     }
 
-    public int getCount(){
+    public int getSolutionCount(){
 	return solutionCount;
     }
 
