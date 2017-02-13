@@ -134,9 +134,9 @@ public class QueenBoard{
 
     public static void main(String[]args){
 	QueenBoard a = new QueenBoard(10);
-	System.out.println(a.getCount());
+	System.out.println(a.getSolutionCount());
 	a.countSolutions();
-	System.out.println(a.getCount());
+	System.out.println(a.getSolutionCount());
 	System.out.println(a);
 
 
