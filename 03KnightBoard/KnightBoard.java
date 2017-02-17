@@ -1,3 +1,6 @@
+import java.util.*;
+
+
 public class KnightBoard{
     private int[][] board;
     private boolean solved;
@@ -47,36 +50,10 @@ public class KnightBoard{
 	return a;
     }
 
-    public void solveHplus(int row, int col, int level){
-	if(solved){
-	    return;
-	}
-
-	if(level > board.length * board[row].length){
-	    solved = true;
-	    return;
-	}
-
-	if(moves[row][col] == 0){
-	    return;
-	}
-
-	int[]movee = new int[8];
 
 
-	for(int i = 0; i < 8 && !solved; i++){
-	    if(row + r[i] >= 0 && row + r[i] < board.length &&
-	       col + c[i] >= 0 && col + c[i] < board[row].length){
-	        movee[i] = moves[row + r[i]][col + c[i]];
-	    }
-	    else{
-		movee[i] = -1;
-	    }
-	}
-	
 
 
-    }
 
     public void solve(){
 	for(int i = 0; i < board.length; i++){
