@@ -16,6 +16,12 @@ public class Maze{
 	    text += "\n";
 	    lines += 1;
 	}
+	if(text.indexOf("S") != text.lastIndexOf("S") || 
+	   text.indexOf("S") == -1 ||
+	   text.indexOf("E") != text.lastIndexOf("E") ||
+	   text.indexOf("E") == -1){
+	    throw new FileNotFoundException("no s e");
+	}
 	int width = text.substring(0, text.indexOf("\n")).length();
 	char[][] m = new char[lines][width];
 	for(int i = 0; i < lines; i++){
@@ -37,7 +43,7 @@ public class Maze{
     }
 
     public static void main(String[]args) throws FileNotFoundException{
-	Maze f = new Maze("data1.dat");
+	Maze f = new Maze("data21.dat");
 	f.display();
     }
 }
