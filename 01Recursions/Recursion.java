@@ -10,9 +10,9 @@ public class Recursion{
     private static double sqhelp(double num, double guess){
 	double asdf = (num / guess + guess) / 2;
 
-	double esp = .00000000001;
+	double esp = .00000001;
 	
-	if(isClose(esp, asdf, guess)){
+	if(isClose(esp, num, guess * guess)){
 	    return guess;
 	}
 	else{
