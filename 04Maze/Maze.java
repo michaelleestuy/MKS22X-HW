@@ -6,8 +6,10 @@ public class Maze{
     private char[][]maze;
     private boolean animate;
     private int sr, sc, er, ec;
+    private boolean solved;
 
     public Maze(String file) throws FileNotFoundException{	
+	solved = false;
 	File infile = new File(file);
 	Scanner inf = new Scanner(infile);
 	String text = "";
@@ -53,6 +55,17 @@ public class Maze{
     }
 
     private void solveH(int r, int c){
+	
+	if(r == er && c == ec){
+	    solved = true;
+	    return;
+	}
+
+	if(solved)
+	    return;
+
+	maze[r][c] = '@';
+	
 	ArrayList<Integer> vs = new ArrayList<Integer>();
 	for(int i = 0; i < 4; i++){
 	    if (whatIs(r, c, i) == ' ')
@@ -63,6 +76,13 @@ public class Maze{
 	    revert(r, c);
 	    return; 
 	}
+	
+	
+	
+    }
+
+    private void revert(int r, int c){
+
     }
 
     public void display(){
