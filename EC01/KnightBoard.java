@@ -161,7 +161,8 @@ public class KnightBoard{
     }
 
     public static void main(String[]args){
-	KnightBoard a = new KnightBoard(20, 20);
+	int m = 94;
+	KnightBoard a = new KnightBoard(m, m);
 	a.solveFast();
 	System.out.println(a);
 	
