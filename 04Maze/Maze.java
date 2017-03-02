@@ -66,7 +66,8 @@ public class Maze{
 
 	if (maze[r][c] == '#')
 	    return;
-	maze[r][c] = '@';
+	if(!(r == sr && c == sc))
+	    maze[r][c] = '@';
 	display();
 	
 	ArrayList<Integer> vs = new ArrayList<Integer>();
@@ -149,7 +150,7 @@ public class Maze{
     }
 
     public static void main(String[]args) throws FileNotFoundException{
-	Maze f = new Maze("data2.dat");
+	Maze f = new Maze("data3.dat");
 	f.display();
 	f.solve();
 	f.display();
