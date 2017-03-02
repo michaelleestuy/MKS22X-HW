@@ -64,7 +64,10 @@ public class Maze{
 	if(solved)
 	    return;
 
+	if (maze[r][c] == '#')
+	    return;
 	maze[r][c] = '@';
+	display();
 	
 	ArrayList<Integer> vs = new ArrayList<Integer>();
 	for(int i = 0; i < 4; i++){
@@ -76,20 +79,65 @@ public class Maze{
 	    revert(r, c);
 	    return; 
 	}
-	
-	
-	
+
+	for(int i : vs){
+	    if(!solved){
+		if(i == 0)
+		    solveH(r - 1, c);
+		if(i == 1)
+		    solveH(r, c + 1);
+		if(i == 2)
+		    solveH(r + 1, c);
+		if(i == 3)
+		    solveH(r, c - 1);
+	    }
+	}	
     }
 
-    private void revert(int r, int c){
+    public boolean solve(){
+	solveH(sr, sc);
+	return true;
+    }
 
+    private boolean isAlone(int r, int c){
+	int dir = -1;
+	for(int i = 0; i < 4; i++){
+	    if(whatIs(r, c, i) == ' ')
+		dir = i;
+	}
+	return dir == -1;
+    }
+	
+
+    private void revert(int r, int c){
+	maze[r][c] = '.';
+	if(isAlone(r, c))
+	    return;
+	int dir = -1;
+	for(int i = 0; i < 4; i++){
+	    if(whatIs(r, c, i) == '@')
+		dir = i;
+	}
+
+	if(dir == -1)
+	    return;
+	else{
+	    if(dir == 0)
+		revert(r - 1, c);
+	    if(dir == 1)
+		revert(r, c + 1);
+	    if(dir == 2)
+		revert(r - 1, c);
+	    if(dir == 3)
+		revert(r, c - 1);
+	}
     }
 
     public void display(){
 	System.out.println("\033[2J\033[1;1H");
 	for(int i = 0; i < maze.length; i++){
 	    for(int k = 0; k < maze[i].length; k++){
-		System.out.print(maze[i][k] + " ");
+		System.out.print(maze[i][k] + "");
 	    }
 	    System.out.println();
 	}
@@ -97,6 +145,8 @@ public class Maze{
 
     public static void main(String[]args) throws FileNotFoundException{
 	Maze f = new Maze("data1.dat");
+	f.display();
+	f.solve();
 	f.display();
     }
 }
