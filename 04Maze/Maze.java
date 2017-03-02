@@ -71,12 +71,12 @@ public class Maze{
 	
 	ArrayList<Integer> vs = new ArrayList<Integer>();
 	for(int i = 0; i < 4; i++){
-	    if (whatIs(r, c, i) == ' ')
+	    if (whatIs(r, c, i) == ' ' || whatIs(r, c, i) == 'E')
 		vs.add(i);
 	}
 
 	if(vs.size() == 0){
-	    revert(r, c);
+	    maze[r][c] = '.';
 	    return; 
 	}
 
@@ -91,7 +91,11 @@ public class Maze{
 		if(i == 3)
 		    solveH(r, c - 1);
 	    }
-	}	
+	}
+
+	if(!solved)
+	    maze[r][c] = '.';
+	
     }
 
     public boolean solve(){
@@ -108,7 +112,7 @@ public class Maze{
 	return dir == -1;
     }
 	
-
+    /*
     private void revert(int r, int c){
 	maze[r][c] = '.';
 	if(isAlone(r, c))
@@ -132,6 +136,7 @@ public class Maze{
 		revert(r, c - 1);
 	}
     }
+    */
 
     public void display(){
 	System.out.println("\033[2J\033[1;1H");
@@ -144,7 +149,7 @@ public class Maze{
     }
 
     public static void main(String[]args) throws FileNotFoundException{
-	Maze f = new Maze("data1.dat");
+	Maze f = new Maze("data2.dat");
 	f.display();
 	f.solve();
 	f.display();
