@@ -8,37 +8,52 @@ public class Maze{
     private int sr, sc, er, ec;
     private boolean solved;
 
-    public Maze(String file) throws FileNotFoundException{	
-	solved = false;
-	File infile = new File(file);
-	Scanner inf = new Scanner(infile);
-	String text = "";
-	int lines = 0;
-	while(inf.hasNextLine()){
-	    text += inf.nextLine();
-	    text += "\n";
-	    lines += 1;
-	}
-	if(text.indexOf("S") != text.lastIndexOf("S") || 
-	   text.indexOf("S") == -1 ||
-	   text.indexOf("E") != text.lastIndexOf("E") ||
-	   text.indexOf("E") == -1){
-	    throw new FileNotFoundException("No S or E found in file");
-	}
-	int width = text.substring(0, text.indexOf("\n")).length();
-	char[][] m = new char[lines][width];
-	for(int i = 0; i < lines; i++){
-	    for(int k = 0; k < width; k++){
-		m[i][k] = text.charAt(i * (width + 1) + k);
-		if(text.charAt(i * (width + 1) + k) == 'S'){
-		    sr = i; sc = k;
-		}
-		if(text.charAt(i * (width + 1) + k) == 'E'){
-		    er = i; ec = k;
+    public Maze(String file) throws FileNotFoundException{
+	try{
+	    solved = false;
+	    File infile = new File(file);
+	    Scanner inf = new Scanner(infile);
+	    String text = "";
+	    int lines = 0;
+	    while(inf.hasNextLine()){
+		text += inf.nextLine();
+		text += "\n";
+		lines += 1;
+	    }
+	    if(text.indexOf("S") != text.lastIndexOf("S") || 
+	       text.indexOf("S") == -1 ||
+	       text.indexOf("E") != text.lastIndexOf("E") ||
+	       text.indexOf("E") == -1){
+		throw new FileNotFoundException("No S or E found in file");
+	    }
+	    int width = text.substring(0, text.indexOf("\n")).length();
+	    char[][] m = new char[lines][width];
+	    for(int i = 0; i < lines; i++){
+		for(int k = 0; k < width; k++){
+		    m[i][k] = text.charAt(i * (width + 1) + k);
+		    if(text.charAt(i * (width + 1) + k) == 'S'){
+			sr = i; sc = k;
+		    }
+		    if(text.charAt(i * (width + 1) + k) == 'E'){
+			er = i; ec = k;
+		    }
 		}
 	    }
+	    maze = m;
 	}
-	maze = m;
+	catch(FileNotFoundException e){
+	    System.out.println("Error: File not found. Please enter a valid path.");
+	    System.exit(0);
+	}
+    }
+
+    private void wait(int millis){
+	try{
+	    Thread.sleep(millis);
+	}
+	catch(InterruptedException e){
+	    
+	}
     }
 
     private char whatIs(int r, int c, int dir){
@@ -55,6 +70,11 @@ public class Maze{
     }
 
     private void solveH(int r, int c){
+
+	if(animate){
+	     System.out.println("\033[2J\033[1;1H" + this);
+	     wait(20);
+	}
 	
 	if(r == er && c == ec){
 	    solved = true;
@@ -68,7 +88,7 @@ public class Maze{
 	    return;
 	if(!(r == sr && c == sc))
 	    maze[r][c] = '@';
-	display();
+	
 	
 	ArrayList<Integer> vs = new ArrayList<Integer>();
 	for(int i = 0; i < 4; i++){
@@ -104,6 +124,14 @@ public class Maze{
 	return true;
     }
 
+    public void setAnimate(boolean b){
+	animate = b;
+    }
+
+    public void clearTerminal(){
+	System.out.println("\033[2J\033[1;1H");
+    }
+
     private boolean isAlone(int r, int c){
 	int dir = -1;
 	for(int i = 0; i < 4; i++){
@@ -112,33 +140,19 @@ public class Maze{
 	}
 	return dir == -1;
     }
-	
-    /*
-    private void revert(int r, int c){
-	maze[r][c] = '.';
-	if(isAlone(r, c))
-	    return;
-	int dir = -1;
-	for(int i = 0; i < 4; i++){
-	    if(whatIs(r, c, i) == '@')
-		dir = i;
-	}
 
-	if(dir == -1)
-	    return;
-	else{
-	    if(dir == 0)
-		revert(r - 1, c);
-	    if(dir == 1)
-		revert(r, c + 1);
-	    if(dir == 2)
-		revert(r - 1, c);
-	    if(dir == 3)
-		revert(r, c - 1);
+    public String toString(){
+	String m = "";
+	for(int i = 0; i < maze.length; i++){
+	    for(int k = 0; k < maze[i].length; k++){
+		m += maze[i][k] + "";
+	    }
+	    m += "\n";
 	}
+	return m;
     }
-    */
 
+    /*
     public void display(){
 	System.out.println("\033[2J\033[1;1H");
 	for(int i = 0; i < maze.length; i++){
@@ -148,11 +162,14 @@ public class Maze{
 	    System.out.println();
 	}
     }
-
+    */
+    
     public static void main(String[]args) throws FileNotFoundException{
 	Maze f = new Maze("data3.dat");
-	f.display();
+	
+	f.setAnimate(true);
 	f.solve();
-	f.display();
+	System.out.println(f);
+      
     }
 }
