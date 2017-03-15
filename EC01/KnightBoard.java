@@ -161,10 +161,15 @@ public class KnightBoard{
     }
 
     public static void main(String[]args){
+<<<<<<< HEAD
 	int m = 80;
+=======
+	int m = 90;
+>>>>>>> 944ae02e33a0b6c925e2e8b90f8c97298f62e511
 	KnightBoard a = new KnightBoard(m, m);
 	a.solveFast();
 	System.out.println(a);
+	System.out.println(m + "x" + m);
 	
     }
     
