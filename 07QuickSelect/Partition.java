@@ -9,20 +9,17 @@ public class Partition{
 	int s = start;
 	int e = end - 1;
 	while(s < e){
-	    while(data[s] <= div && s < e){
+	    while(data[s] < div){
 		s++;
-		System.out.println("S: " + s);
 	    }
-
-	    while(data[e] > div && s < e){
+	    while(data[e] > div){
 		e--;
-		System.out.println("E: " + e);
 	    }
-
-	    swap(data, s, e);
-	    display(data);
+	    if(s < e){
+		swap(data, s, e);
+	    }
 	}
-	return s;
+	return e;	
     }
 
     private static void swap(int[]data, int a, int b){
@@ -72,7 +69,9 @@ public class Partition{
     public static void main(String[]args){
 	int[]a = {3, 2, 6, 7, 9, 10, 4, 1, 5, 8};
 	display(a);
+	System.out.println("index: ");
 	System.out.println(part(a, 3, a.length));
 	display(a);
+	System.out.println("!");
     }
 }
