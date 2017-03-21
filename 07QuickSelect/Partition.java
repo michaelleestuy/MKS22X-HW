@@ -5,6 +5,34 @@ public class Partition{
     public static int part(int[]data, int start, int end){
 	int inde = start + ( (int)(Math.random() * end) ) % (end - start);
 	int div = data[inde];
+	
+	swap(data, inde, start);
+	int l = start;
+	int i = start + 1;
+	int e = end - 1;
+
+	while(i <= e){
+	    if(data[i] == div){
+		i++;
+	    }
+	    else if(data[i] < div){
+		swap(data, i, l);
+		l++;
+		i++;
+	    }
+	    else{
+		swap(data, i, e);
+		e--;
+	    }
+	}
+	return l;
+
+    }
+
+    /*
+    public static int part(int[]data, int start, int end){
+	int inde = start + ( (int)(Math.random() * end) ) % (end - start);
+	int div = data[inde];
 
 	int s = start;
 	int e = end - 1;
@@ -21,6 +49,7 @@ public class Partition{
 	}
 	return e;	
     }
+    */
 
     private static void swap(int[]data, int a, int b){
 	int s = data[a];
@@ -67,10 +96,10 @@ public class Partition{
     }
 
     public static void main(String[]args){
-	int[]a = {3, 2, 6, 7, 9, 10, 4, 1, 5, 8};
+	int[]a = {8, 8, 8, 8, 8, 8, 3, 2, 6, 7, 9, 10, 4, 1, 5, 8, 8, 8, 8, 8};
 	display(a);
 	System.out.println("index: ");
-	System.out.println(part(a, 3, a.length));
+	System.out.println(part(a, 0, a.length));
 	display(a);
 	System.out.println("!");
     }
