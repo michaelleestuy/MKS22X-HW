@@ -37,7 +37,10 @@ public class Quick{
     }
 
     public static void main(String[]args){
-	int[]a = {2, 4, 63, 41, 44, 192, 9182, 1};
+	
+	int[]a = new int[5000];
+	for(int i = 0; i < 5000; i++)
+	    a[i] = 0;
 	quicksort(a);
 	Partition.display(a);
     }

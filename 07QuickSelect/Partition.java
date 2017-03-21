@@ -1,7 +1,7 @@
 
 
 public class Partition{
-
+    
     public static int part(int[]data, int start, int end){
 	int inde = start + ( (int)(Math.random() * end) ) % (end - start);
 	int div = data[inde];
@@ -28,7 +28,7 @@ public class Partition{
 	return l;
 
     }
-
+    
     /*
     public static int part(int[]data, int start, int end){
 	int inde = start + ( (int)(Math.random() * end) ) % (end - start);
