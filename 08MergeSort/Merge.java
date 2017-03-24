@@ -1,24 +1,43 @@
 public class Merge{
-    /*
-    public static void merge(int[]data, int start, int send, int end){
-	int s = start;
-	int e = send;
-	while(s < e){
-	    if(data[s] <= data[e])
-		s++;
-	    else{
-		swap(data, s, e);
-		s++;		
-	    }
-	}
-    }
-    */
 
-    private static int[] mergeh(int[]d, int start, int end){
+    public static void mergesort(int[]data){
+        merge(data, 0, data.length);
+	
+	
+    }
+
+    public static void merge(int[]data, int start, int end){
 	if(end - start <= 1)
+	    return;
+	
+	int a = (end + start) / 2;
+	merge(data, start, a);
+	merge(data, a, end);
+
+	mergeh(data, start, end, a);
     }
 
-    public static void merge(int[]data, int[]data2, int[] dest){
+    public static void mergeh(int[]data, int start, int end, int divide){
+	int[]first = new int[divide - start];
+	for(int i = 0; i < first.length; i++){
+	    first[i] = data[i];
+	}
+
+	int[] second = new int[end - divide];
+	for(int i = divide; i < end - start; i++){
+	    second[i - divide] = data[i];
+	}
+
+	int[] result = new int[end - start];
+	mergeh(first, second, result);
+	
+	for(int i = start; i < end; i++){
+	    data[i] = result[i - start];
+	}
+	
+    }
+    
+    public static void mergeh(int[]data, int[]data2, int[] dest){
 	int s1 = 0;
 	int s2 = 0;
 	for(int i = 0; i < dest.length; i++){
@@ -49,7 +68,7 @@ public class Merge{
 	    }
 	}
     }
-
+    
     public static void display(int[] a){
 	for(int i = 0; i < a.length; i++){
 	    System.out.print(a[i] + " ");
@@ -66,8 +85,11 @@ public class Merge{
 	int[]a = {0, 2, 4, 6, 8, 10};
 	int[]b = {1, 3, 5, 7, 9};
 	int[]c = new int[11];
-	merge(a, b, c);
+	int[]d = {0, 2, 4, 6, 8, 10, 1, 3, 5, 7, 9};
+	mergeh(a, b, c);
 	display(c);
+	mergeh(d, 0, 11, 6);
+	display(d);
 
     }
 }
