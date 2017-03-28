@@ -24,7 +24,15 @@ public class MyLinkedList{
     private int size;
     private LNode start;
 
-    private LNode get(int a){
+    public int size(){
+	return size;
+    }
+
+    private int get(int a){
+	return this.getL(a).a;
+    }
+
+    private LNode getL(int a){
 	
 	LNode cur = start;
 	for(int i = 0; i < a; i++){
@@ -40,7 +48,7 @@ public class MyLinkedList{
 	    size ++;
 	    return true;
 	}	
-	LNode cur = this.get(size - 1);
+	LNode cur = this.getL(size - 1);
 	LNode nn = new LNode(v);
 	cur.d = nn;
 	size++;
@@ -50,7 +58,7 @@ public class MyLinkedList{
     public String toString(){
 	String a = "";
 	for(int i = 0; i < size; i++){
-	    a += this.get(i).a + " ";	    
+	    a += this.get(i) + " ";	    
 	}
 	return a;
     }
@@ -61,6 +69,7 @@ public class MyLinkedList{
 	a.add(0);
 	a.add(1);
 	a.add(2);
+	a.add(19);
 	System.out.println(a);
     }
 }
