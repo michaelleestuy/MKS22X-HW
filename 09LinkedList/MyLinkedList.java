@@ -63,6 +63,12 @@ public class MyLinkedList{
 	return a;
     }
 
+    public int set(int index, int v){
+	int z = this.get(index);
+	this.getL(index).a = v;
+	return z;
+    }
+
 
     public static void main(String[]args){
 	MyLinkedList a = new MyLinkedList();
