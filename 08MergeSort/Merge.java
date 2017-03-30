@@ -1,3 +1,4 @@
+import java.util.Arrays;
 public class Merge{
 
     public static void mergesort(int[]data){
@@ -98,11 +99,23 @@ public class Merge{
 	data[b] = s;
     }
 
+    public static int[] randomArray(int size){
+	int[] ary = new int[size];
+	for (int i = 0; i < size; i++){
+	    ary[i] = (int)(Math.random() * ary.length - ary.length / 2);
+	}
+	return ary;
+    }
+
     public static void main(String[]args){
-	int[]a = {95, 15, 15115, 159697, 19951, 0};
-	display(a);
-	mergesort(a);
-	display(a);
+	for (int i = 0; i < 1000000; i++){
+	    int[]a = randomArray(2000000);
+	    mergesort(a);
+	    String test = Arrays.toString(a);
+	    Arrays.sort(a);
+	    String correct = Arrays.toString(a);
+	    System.out.println(test.equals(correct));
+	}
 
     }
 }
