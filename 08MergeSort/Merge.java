@@ -1,11 +1,27 @@
 public class Merge{
 
     public static void mergesort(int[]data){
-        merge(data, 0, data.length);
+
+	if(data.length < 2)
+	    return;
+
+	int[]left = new int[data.length / 2];
+	int[]right = new int[data.length - data.length / 2];
 	
+	for(int i = 0; i < left.length; i++){
+	    left[i] = data[i];
+	}
+	for(int i = 0; i < right.length; i++){
+	    right[i] = data[i + left.length];
+	}
+
+	mergesort(left);
+	mergesort(right);
 	
+	mergeh(left, right, data);	
     }
 
+    /*
     public static void merge(int[]data, int start, int end){
 	if(end - start <= 1)
 	    return;
@@ -37,7 +53,7 @@ public class Merge{
 	}
 	
     }
-    
+    */
     public static void mergeh(int[]data, int[]data2, int[] dest){
 	int s1 = 0;
 	int s2 = 0;
@@ -83,16 +99,10 @@ public class Merge{
     }
 
     public static void main(String[]args){
-	int[]a = {0, 2, 40, 60, 80, 100};
-	int[]b = {1, 3, 5, 7, 9};
-	int[]c = new int[11];
-	int[]d = {99,99,99,0, 2, 4, 6, 8, 10, 1, 3, 5, 7, 9,99,99,99};
-	//mergeh(a, b, c);
-	//display(c);
-	display(d);
-	merge(d, 0, 11);
-	//mergeh(d, 3, 14, 9);
-	display(d);
+	int[]a = {95, 15, 15115, 159697, 19951, 0};
+	display(a);
+	mergesort(a);
+	display(a);
 
     }
 }
