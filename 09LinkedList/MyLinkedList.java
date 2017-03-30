@@ -28,11 +28,17 @@ public class MyLinkedList{
 	return size;
     }
 
-    private int get(int a){
+    private int get(int a)throws IndexOutOfBoundsException{
+	if(a < 0 || a >= size){
+	    throw new IndexOutOfBoundsException();
+	}
 	return this.getL(a).a;
     }
 
-    private LNode getL(int a){
+    private LNode getL(int a)throws IndexOutOfBoundsException{
+	if(a < 0 || a >= size){
+	    throw new IndexOutOfBoundsException();
+	}
 	
 	LNode cur = start;
 	for(int i = 0; i < a; i++){
@@ -63,13 +69,21 @@ public class MyLinkedList{
 	return a.substring(0, a.length() - 2) + "]";
     }
 
-    public int set(int index, int v){
+    public int set(int index, int v)throws IndexOutOfBoundsException{
+	if(index < 0 || index >= size){
+	    throw new IndexOutOfBoundsException();
+	}
+
 	int z = this.get(index);
 	this.getL(index).a = v;
 	return z;
     }
 
-    public void add(int index, int ele){
+    public void add(int index, int ele)throws IndexOutOfBoundsException{
+	if(index < 0 || index > size){
+	    throw new IndexOutOfBoundsException();
+	}
+
 	LNode n = this.getL(index);
 	LNode nn = new LNode(ele, n);
 	if(index == 0){
@@ -99,7 +113,11 @@ public class MyLinkedList{
 	return -1;
     }
 
-    public int remove(int index){
+    public int remove(int index)throws IndexOutOfBoundsException{
+	if(index < 0 || index >= size){
+	    throw new IndexOutOfBoundsException();
+	}
+
 	LNode old = this.getL(index);
 	if(index == 0){
 	    start = this.getL(index + 1);
@@ -114,13 +132,13 @@ public class MyLinkedList{
     }
 
 
-    public static void main(String[]args){
+    public static void main(String[]args)throws IndexOutOfBoundsException{
 	MyLinkedList a = new MyLinkedList();
 	a.add(0);
 	a.add(1);
 	a.add(2);
 	a.add(19);
-	a.remove(1);
-	System.out.println(a);
+	System.out.println(a.getL(-1));
+
     }
 }
