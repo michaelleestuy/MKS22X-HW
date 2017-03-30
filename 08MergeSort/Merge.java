@@ -15,17 +15,18 @@ public class Merge{
 	merge(data, a, end);
 
 	mergeh(data, start, end, a);
+	display(data);
     }
 
     public static void mergeh(int[]data, int start, int end, int divide){
 	int[]first = new int[divide - start];
 	for(int i = 0; i < first.length; i++){
-	    first[i] = data[i];
+	    first[i] = data[i + start];
 	}
 
 	int[] second = new int[end - divide];
-	for(int i = divide; i < end - start; i++){
-	    second[i - divide] = data[i];
+	for(int i = 0; i < second.length; i++){
+	    second[i] = data[i + divide];
 	}
 
 	int[] result = new int[end - start];
@@ -82,13 +83,15 @@ public class Merge{
     }
 
     public static void main(String[]args){
-	int[]a = {0, 2, 4, 6, 8, 10};
+	int[]a = {0, 2, 40, 60, 80, 100};
 	int[]b = {1, 3, 5, 7, 9};
 	int[]c = new int[11];
-	int[]d = {0, 2, 4, 6, 8, 10, 1, 3, 5, 7, 9};
-	mergeh(a, b, c);
-	display(c);
-	mergeh(d, 0, 11, 6);
+	int[]d = {99,99,99,0, 2, 4, 6, 8, 10, 1, 3, 5, 7, 9,99,99,99};
+	//mergeh(a, b, c);
+	//display(c);
+	display(d);
+	merge(d, 0, 11);
+	//mergeh(d, 3, 14, 9);
 	display(d);
 
     }
