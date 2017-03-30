@@ -56,17 +56,61 @@ public class MyLinkedList{
     }
 
     public String toString(){
-	String a = "";
+	String a = "[ ";
 	for(int i = 0; i < size; i++){
-	    a += this.get(i) + " ";	    
+	    a += this.get(i) + ", ";	    
 	}
-	return a;
+	return a.substring(0, a.length() - 2) + "]";
     }
 
     public int set(int index, int v){
 	int z = this.get(index);
 	this.getL(index).a = v;
 	return z;
+    }
+
+    public void add(int index, int ele){
+	LNode n = this.getL(index);
+	LNode nn = new LNode(ele, n);
+	if(index == 0){
+	    start = nn;
+	    size++;
+	}
+	else{
+	    this.getL(index - 1).d = nn;
+	    size++;
+	}
+    }
+
+    public int indexOf(int ele){
+	if(size == 0)
+	    return -1;
+	LNode cur = start;
+	for(int i = 0; i < size; i++){
+	    if(cur.a == ele)
+		return i;
+	    else{
+		if(i == size - 1)
+		    return -1;
+		else
+		    cur = cur.d;
+	    }
+	}
+	return -1;
+    }
+
+    public int remove(int index){
+	LNode old = this.getL(index);
+	if(index == 0){
+	    start = this.getL(index + 1);
+	    size--;
+	    return old.a;
+	}
+	else{
+	    this.getL(index - 1).d = this.getL(index + 1);
+	    size--;
+	    return old.a;
+	}
     }
 
 
@@ -76,6 +120,7 @@ public class MyLinkedList{
 	a.add(1);
 	a.add(2);
 	a.add(19);
+	a.remove(1);
 	System.out.println(a);
     }
 }
