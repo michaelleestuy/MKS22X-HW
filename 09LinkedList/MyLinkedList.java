@@ -1,64 +1,155 @@
 public class MyLinkedList{
     private class LNode{
 	public int a;
-	public LNode d;
-
-	public LNode(int v, LNode p){
-	    a = v;
-	    d = p;	    
-	}
+	public LNode next;
+	public LNode prev;
 
 	public LNode(int v){
 	    a = v;
 	}
-	
-	        
+
+	public LNode(int v, LNode start, LNode end){
+	    a = v;
+	    next = end;
+	    prev = start;
+	}
     }
-
-    public MyLinkedList(){
-	size = 0;	
-    }
-
-
 
     private int size;
-    private LNode start;
+    private LNode head;
+    private LNode tail;
 
-    public int size(){
-	return size;
+    public MyLinkedList(){
+	size = 0;
     }
 
-    private int get(int a)throws IndexOutOfBoundsException{
-	if(a < 0 || a >= size){
-	    throw new IndexOutOfBoundsException();
-	}
-	return this.getL(a).a;
+    public int get(int z)throws IndexOutOfBoundsException{
+	return this.getL(z).a;
     }
 
-    private LNode getL(int a)throws IndexOutOfBoundsException{
-	if(a < 0 || a >= size){
+    private LNode getL(int z)throws IndexOutOfBoundsException{
+	if(z < 0 || z >= size){
 	    throw new IndexOutOfBoundsException();
 	}
 	
-	LNode cur = start;
-	for(int i = 0; i < a; i++){
-	    cur = cur.d;
+	if(z < size / 2){
+	    LNode cur = head;
+	    for(int i = 0; i < z; i++){
+		cur = cur.next;
+	    }
+	    return cur;
 	}
-	return cur;
+	else{
+	    LNode cur = tail;
+	    for(int i = z; i > 0; i--){
+		cur = cur.prev;
+	    }
+	    return cur;
+	}  
     }
 
     public boolean add(int v){
 	if(size == 0){
-	    LNode cu = new LNode(v);
-	    start = cu;
-	    size ++;
+	    LNode ss = new LNode(v);
+	    head = ss;
+	    tail = ss;
+	    size++;
 	    return true;
-	}	
-	LNode cur = this.getL(size - 1);
-	LNode nn = new LNode(v);
-	cur.d = nn;
+	}
+	LNode cc = new LNode(v, tail, null);
+	tail.next = cc;
 	size++;
+	tail = cc;       
 	return true;
+    }
+
+    public void add(int index, int v)throws IndexOutOfBoundsException{
+	if(index < 0 || index > size)
+	    throw new IndexOutOfBoundsException();
+
+	if(index == size){
+	    this.add(v);
+	    return;
+	}
+
+	if(index == 0){
+	    LNode ss = new LNode(v);
+	    ss.next = head;
+	    head.prev = ss;
+	    head = ss;
+	    size++;
+	    return;
+	}
+	
+	LNode n = new LNode(v);
+	LNode ii = this.getL(index - 1);
+	LNode jj = this.getL(index);
+	n.prev = ii;
+	n.next = jj;
+	ii.next = n;
+	jj.prev = n;
+	size++;	
+	return;
+    }
+
+    public int set(int index, int value)throws IndexOutOfBoundsException{
+	LNode sss = this.getL(index);
+	int rrr = sss.a;
+	sss.a = value;
+	return rrr;
+    }
+
+    public int indexOf(int value){
+	if(size == 0)
+	    return -1;
+	LNode ccc = head;
+	for(int i = 0; i < size; i++){
+	    if(ccc.a == value)
+		return i;
+	    else{
+		ccc = ccc.next;
+	    }
+	}
+	return -1;	
+    }
+    
+    public int remove(int index)throws IndexOutOfBoundsException{
+	if(size == 1){
+	    int rrr = head.a;
+	    head = null;
+	    tail = null;
+	    return rrr;
+	}
+	
+	if(index == size - 1){
+	    LNode rrr = this.getL(index);
+	    LNode ppp = this.getL(index - 1);
+	    ppp.next = null;
+	    tail = ppp;
+	    size--;
+	    return rrr.a;
+	}
+	
+	if(index == 0){
+	    LNode rrr = this.getL(index);
+	    LNode nnn = this.getL(index + 1);
+	    nnn.prev = null;
+	    head = nnn;
+	    size--;
+	    return rrr.a;
+	}
+	
+	LNode b = this.getL(index);
+	LNode A = this.getL(index - 1);
+	LNode c = this.getL(index + 1);
+	A.next = c;
+	c.prev = A;
+	size--;
+	return b.a;
+    }
+    
+    public int size(){
+	return size;
     }
 
     public String toString(){
@@ -68,69 +159,6 @@ public class MyLinkedList{
 	}
 	return a.substring(0, a.length() - 2) + "]";
     }
-
-    public int set(int index, int v)throws IndexOutOfBoundsException{
-	if(index < 0 || index >= size){
-	    throw new IndexOutOfBoundsException();
-	}
-
-	int z = this.get(index);
-	this.getL(index).a = v;
-	return z;
-    }
-
-    public void add(int index, int ele)throws IndexOutOfBoundsException{
-	if(index < 0 || index > size){
-	    throw new IndexOutOfBoundsException();
-	}
-
-	LNode n = this.getL(index);
-	LNode nn = new LNode(ele, n);
-	if(index == 0){
-	    start = nn;
-	    size++;
-	}
-	else{
-	    this.getL(index - 1).d = nn;
-	    size++;
-	}
-    }
-
-    public int indexOf(int ele){
-	if(size == 0)
-	    return -1;
-	LNode cur = start;
-	for(int i = 0; i < size; i++){
-	    if(cur.a == ele)
-		return i;
-	    else{
-		if(i == size - 1)
-		    return -1;
-		else
-		    cur = cur.d;
-	    }
-	}
-	return -1;
-    }
-
-    public int remove(int index)throws IndexOutOfBoundsException{
-	if(index < 0 || index >= size){
-	    throw new IndexOutOfBoundsException();
-	}
-
-	LNode old = this.getL(index);
-	if(index == 0){
-	    start = this.getL(index + 1);
-	    size--;
-	    return old.a;
-	}
-	else{
-	    this.getL(index - 1).d = this.getL(index + 1);
-	    size--;
-	    return old.a;
-	}
-    }
-
 
     public static void main(String[]args)throws IndexOutOfBoundsException{
 	MyLinkedList a = new MyLinkedList();
