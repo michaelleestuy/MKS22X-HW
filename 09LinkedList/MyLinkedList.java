@@ -63,10 +63,7 @@ public class MyLinkedList{
 	return true;
     }
 
-    public void add(int index, int v)throws IndexOutOfBoundsException{
-	if(index < 0 || index > size)
-	    throw new IndexOutOfBoundsException();
-
+    public void add(int index, int v){
 	if(index == size){
 	    this.add(v);
 	    return;
@@ -153,20 +150,18 @@ public class MyLinkedList{
     }
 
     public String toString(){
-	String a = "[ ";
+	String a = "";
 	for(int i = 0; i < size; i++){
-	    a += this.get(i) + ", ";	    
+	    a += this.get(i) + " ";	    
 	}
-	return a.substring(0, a.length() - 2) + "]";
+	return a;
     }
 
     public static void main(String[]args)throws IndexOutOfBoundsException{
 	MyLinkedList a = new MyLinkedList();
 	a.add(0);
 	a.add(1);
-	a.add(2);
-	a.add(19);
-	System.out.println(a.getL(-1));
+	System.out.println(a);
 
     }
 }
