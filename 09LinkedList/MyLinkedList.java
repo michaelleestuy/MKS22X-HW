@@ -1,4 +1,6 @@
-public class MyLinkedList{
+import java.util.*;
+
+public class MyLinkedList implements Iterable<Integer>{
     private class LNode{
 	public int a;
 	public LNode next;
@@ -14,6 +16,35 @@ public class MyLinkedList{
 	    prev = start;
 	}
     }
+
+    private class Literator implements Iterator<Integer>{
+	private MyLinkedList a;
+	private LNode index;
+
+	public Literator(MyLinkedList aa){
+	    a = aa;
+	    index = a.head;
+	}
+
+	public boolean hasNext(){
+	    return (index.next != null);
+	}
+	
+	public Integer next(){
+	    int aa = index.next.a;
+	    index = index.next;
+	    return aa;
+	}
+
+	public void remove(){
+	    throw new UnsupportedOperationException();
+	}
+    }
+
+    public Iterator<Integer> iterator(){
+	return new Literator(this);
+    }
+    
 
     private int size;
     private LNode head;
@@ -168,7 +199,7 @@ public class MyLinkedList{
 	MyLinkedList a = new MyLinkedList();
 	a.add(0);
 	a.add(1);
-	a.add(141);
+	a.add(1, 141);
 	System.out.println(a);
 	System.out.println(a.indexOf(11));
     }
