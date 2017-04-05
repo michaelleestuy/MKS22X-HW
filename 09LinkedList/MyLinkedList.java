@@ -31,7 +31,7 @@ public class MyLinkedList{
 	if(z < 0 || z >= size){
 	    throw new IndexOutOfBoundsException();
 	}
-	
+	/*
 	if(z < size / 2){
 	    LNode cur = head;
 	    for(int i = 0; i < z; i++){
@@ -41,11 +41,18 @@ public class MyLinkedList{
 	}
 	else{
 	    LNode cur = tail;
-	    for(int i = z; i > 0; i--){
+	    for(int i = size - 1; i > 0; i--){
 		cur = cur.prev;
 	    }
 	    return cur;
-	}  
+	} 
+	*/
+
+	LNode cur = head;
+	for(int i = 0; i < z; i++){
+	    cur = cur.next;
+	}
+	return cur;
     }
 
     public boolean add(int v){
@@ -161,7 +168,8 @@ public class MyLinkedList{
 	MyLinkedList a = new MyLinkedList();
 	a.add(0);
 	a.add(1);
+	a.add(141);
 	System.out.println(a);
-
+	System.out.println(a.indexOf(11));
     }
 }
