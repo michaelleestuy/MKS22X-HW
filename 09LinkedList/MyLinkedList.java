@@ -64,22 +64,6 @@ public class MyLinkedList implements Iterable<Integer>{
 	if(z < 0 || z >= size){
 	    throw new IndexOutOfBoundsException();
 	}
-	/*
-	if(z < size / 2){
-	    LNode cur = head;
-	    for(int i = 0; i < z; i++){
-		cur = cur.next;
-	    }
-	    return cur;
-	}
-	else{
-	    LNode cur = tail;
-	    for(int i = size - 1; i > 0; i--){
-		cur = cur.prev;
-	    }
-	    return cur;
-	} 
-	*/
 
 	LNode cur = head;
 	for(int i = 0; i < z; i++){
