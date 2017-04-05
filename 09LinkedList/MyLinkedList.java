@@ -27,11 +27,13 @@ public class MyLinkedList implements Iterable<Integer>{
 	}
 
 	public boolean hasNext(){
-	    return (index.next != null);
+	    return (index != null);
 	}
 	
-	public Integer next(){
-	    int aa = index.next.a;
+	public Integer next()throws NoSuchElementException{
+	    if(!hasNext())
+		throw new NoSuchElementException();
+	    int aa = index.a;
 	    index = index.next;
 	    return aa;
 	}
@@ -188,19 +190,27 @@ public class MyLinkedList implements Iterable<Integer>{
     }
 
     public String toString(){
-	String a = "";
+	if(size == 0)
+	    return "[]";
+	String a = "[ ";
 	for(int i = 0; i < size; i++){
-	    a += this.get(i) + " ";	    
+	    a += this.get(i) + ", ";	    
 	}
-	return a;
+	return a.substring(0, a.length() - 2) + "]";
     }
 
     public static void main(String[]args)throws IndexOutOfBoundsException{
 	MyLinkedList a = new MyLinkedList();
-	a.add(0);
-	a.add(1);
+	
+	//a.add(0);
+	//a.add(1);
+	/*
 	a.add(1, 141);
+	a.add(124949);
+	*/
+        for(int i : a){
+	    System.out.println(i);
+	}
 	System.out.println(a);
-	System.out.println(a.indexOf(11));
     }
 }
