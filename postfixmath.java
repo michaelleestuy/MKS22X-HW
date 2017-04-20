@@ -23,7 +23,7 @@ public class postfixmath{
 	    return (double)a * (double)b;
 	if(op == "/")
 	    return (double)a / (double)b;
-	else(op == "%")
+	else
 	    return (double)a % (double)b;
     }
 
