@@ -37,11 +37,12 @@ public class Quick{
     }
 
     public static void main(String[]args){
-	
-	int[]a = new int[5000];
-	for(int i = 0; i < 5000; i++)
-	    a[i] = 0;
+	for(int i = 0; i < 10000000; i++)
+	    System.out.print(i + " ");
+	/*	
+	int[] a = {1};
 	quicksort(a);
 	Partition.display(a);
+	*/
     }
 }
