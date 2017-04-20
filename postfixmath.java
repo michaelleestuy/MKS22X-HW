@@ -10,21 +10,28 @@ public class postfixmath{
 	Stack<Double> staa = new Stack();
 
 	for(int i = 0; i < tooo.length; i++){
-	    
+	    if(isO(tooo[i])){
+		staa.push(apply(staa.pop().toString(), staa.pop().toString(), tooo[i]));
+	    }
+	    else{
+		staa.push(new Double(tooo[i]).doubleValue());
+	    }
 	}
+
+	return new Double(staa.pop()).doubleValue();
     }
 
-    private static double apply(String a, String b, String op){
-	if(op == "+")
-	    return (double)a + (double)b;
-	if(op == "-")
-	    return (double)a - (double)b;
-	if(op == "*")
-	    return (double)a * (double)b;
-	if(op == "/")
-	    return (double)a / (double)b;
+    private static double apply(String b, String a, String op){
+	if(op.equals("+"))
+	    return new Double(a).doubleValue() + new Double(b).doubleValue();
+	if(op.equals("-"))
+	    return new Double(a).doubleValue() - new Double(b).doubleValue();
+	if(op.equals("*"))
+	    return new Double(a).doubleValue() * new Double(b).doubleValue();
+	if(op.equals("/"))
+	    return new Double(a).doubleValue() / new Double(b).doubleValue();
 	else
-	    return (double)a % (double)b;
+	    return new Double(a).doubleValue() % new Double(b).doubleValue();
     }
 
     private static boolean isO(String s){
@@ -34,6 +41,9 @@ public class postfixmath{
 	    a == '-' ||
 	    a == '/' ||
 	    a == '%';
+    }
+    public static void main(String[]args){
+	System.out.println(eval("10 28 24 4 / % *"));
     }
 
 }
