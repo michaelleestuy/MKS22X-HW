@@ -1,3 +1,5 @@
+import java.util.*;
+
 public class MyDeque{
     private String[] deck;
     private int start;
@@ -9,7 +11,9 @@ public class MyDeque{
 	end = 2;
     }
 
-    public void addFirst(String s){
+    public void addFirst(String s)throws NullPointerException{
+	if(s == null)
+	    throw new NullPointerException();
 	expand();
 	deck[start] = s;
 	if(start == 0){
@@ -20,7 +24,9 @@ public class MyDeque{
 	}
     }
 
-    public void addLast(String s){
+    public void addLast(String s)throws NullPointerException{
+	if(s == null)
+	    throw new NullPointerException();
 	expand();
 	deck[end] = s;
 	if(end == deck.length - 1){
@@ -31,7 +37,9 @@ public class MyDeque{
 	}
     }
     
-    public String removeFirst(){
+    public String removeFirst()throws NoSuchElementException{
+	if(start + 1 == end || start == deck.length - 1 && end == 0)
+	    throw new NoSuchElementException();
 	if(start == deck.length - 1){
 	    start = 0;
 	    return deck[start];
@@ -42,7 +50,9 @@ public class MyDeque{
 	}
     }
 
-    public String removeLast(){
+    public String removeLast()throws NoSuchElementException{
+	if(start + 1 == end || start == deck.length - 1 && end == 0)
+	    throw new NoSuchElementException();
 	if(end == 0){
 	    end = deck.length - 1;
 	    return deck[end];
@@ -51,6 +61,22 @@ public class MyDeque{
 	    end--;
 	    return deck[end];
 	}
+    }
+
+    public String getFirst()throws NoSuchElementException{
+	if(start + 1 == end || start == deck.length - 1 && end == 0)
+	    throw new NoSuchElementException();
+	String s = removeFirst();
+	addFirst(s);
+	return s;
+    }
+
+    public String getLast()throws NoSuchElementException{
+	if(start + 1 == end || start == deck.length - 1 && end == 0)
+	    throw new NoSuchElementException();
+	String s = removeLast();
+	addLast(s);
+	return s;
     }
 
     private void expand(){
@@ -80,13 +106,8 @@ public class MyDeque{
 
     public static void main(String[]args){
 	MyDeque a = new MyDeque();
-
-	for(int i = 0; i < 100; i++){
-	    a.addFirst(i + "");
-	}
-	for(int i = 0; i < 100; i++){
-	    System.out.print(a.removeLast() + " ");
-	}
+	a.addFirst(null);
+	System.out.println(a.removeLast());
     }
  
 }
