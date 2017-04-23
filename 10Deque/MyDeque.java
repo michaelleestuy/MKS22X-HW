@@ -61,6 +61,7 @@ public class MyDeque{
 		deck2[i] = removeFirst();
 		i++;
 	    }
+	    deck = deck2;
 	    start = deck2.length - 1;
 	    end = deck.length - 2;
 	}
@@ -71,6 +72,7 @@ public class MyDeque{
 		deck3[i] = removeFirst();
 		i++;
 	    }
+	    deck = deck3;
 	    start = deck3.length - 1;
 	    end = deck.length - 2;
 	}
