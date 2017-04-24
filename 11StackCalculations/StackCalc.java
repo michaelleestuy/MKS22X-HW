@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class postfixmath{
+public class StackCalc{
 
 
 
