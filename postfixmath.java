@@ -7,7 +7,7 @@ public class postfixmath{
 
     public static double eval(String s){
 	String[] tooo = s.split(" ");
-	Stack<Double> staa = new Stack();
+	Stack<Double> staa = new Stack<Double>();
 
 	for(int i = 0; i < tooo.length; i++){
 	    if(isO(tooo[i])){
