@@ -37,11 +37,22 @@ public class MyHeap{
     }
 
     private void pushUp(int n){
-	if(LChild(n).compareTo(RChild(n)) * konstans <= 0){
-	    arr.set(n, LChild(n));
-	    
-	}
+
+       
+    }
+
+    private void pushDown(int n){
+	
+	arr.set(1, arr.remove(size));
+	
+    }
+
+    public void add(String s){
 
     }
 
+    public String remove(){
+	
+    }
+    
 }
