@@ -41,7 +41,7 @@ public class MyHeap{
     }
 
     private void pushUp(int n){
-	if (hasParent(n) && getParent(n).compareTo(arr.get(n)) * konstans > 0){
+	if (hasParent(n) && getParent(n).compareTo(arr.get(n)) * konstans < 0){
 	    String s = getParent(n);
 	    arr.set(n / 2, arr.get(n));
 	    arr.set(n, s);
@@ -115,14 +115,16 @@ public class MyHeap{
 
     public static void main(String[]args){
 	MyHeap a = new MyHeap();
-	a.add("b");
-	a.add("c");
-	a.add("a");
 	a.add("d");
-	a.add("e");
-	for(int i = 0; i < 5; i++)
-	    System.out.println(a.remove());
-	
+	a.add("c");
+	a.add("b");
+	a.add("a");
+	a.display();
+	System.out.println();
+	System.out.println(a.remove());
+	System.out.println();
+	a.display();
+	System.out.println();
 
     }
     
