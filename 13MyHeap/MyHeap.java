@@ -54,9 +54,7 @@ public class MyHeap{
 	if(n == 0)
 	    return;
 
-	if(n > size)
-	    return;
-        
+
 	int pos = 0; //0 = 0, -1 = L, 1 = R
 	String s = arr.get(n);
 	if(hasLChild(n) && s.compareTo(LChild(n)) > 0){
@@ -72,16 +70,18 @@ public class MyHeap{
 	    return;
 	if(pos == -1){
 	    String l = LChild(n);
-	    arr.set(n / 2, arr.get(n));
+	    arr.set(n * 2, arr.get(n));
 	    arr.set(n, l);
-	    pushDown(n / 2);
+	    pushDown(n * 2);
+	    return;
 	}
 
 	if(pos == 1){
 	    String l = RChild(n);
-	    arr.set(n / 2 + 1, arr.get(n));
+	    arr.set(n * 2 + 1, arr.get(n));
 	    arr.set(n, l);
-	    pushDown(n / 2 + 1);
+	    pushDown(n * 2 + 1);
+	    return;
 	}
     }
 
@@ -93,13 +93,11 @@ public class MyHeap{
 
     public String remove(){
 	if(size == 1){
-	    String s = arr.remove(size);
+	    String s = arr.get(1);
 	    size--;
+	    arr.remove(1);
 	    return s;
 	}
-
-
-
 
 
 	String s = arr.get(1);
@@ -118,17 +116,23 @@ public class MyHeap{
 
     public static void main(String[]args){
 	MyHeap a = new MyHeap();
-	a.add("d");
-	a.add("c");
-	a.add("b");
 	a.add("a");
-	a.display();
-	System.out.println();
-	System.out.println(a.remove());
-	System.out.println();
-	a.display();
-	System.out.println();
-
+	a.add("e");
+	a.add("g");
+	a.add("u");
+	a.add("q");
+	a.add("p");
+	a.add("m");
+	a.add("m");
+	a.add("l");
+	a.add("y");
+	a.add("a");
+	a.add("e");
+	a.add("w");
+	a.add("l");
+	a.add("u");
+	for(int i = 0; i < 15; i++)
+	    System.out.println(a.remove());
     }
     
 }
