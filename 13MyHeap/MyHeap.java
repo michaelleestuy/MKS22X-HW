@@ -53,6 +53,9 @@ public class MyHeap{
 
 	if(n == 0)
 	    return;
+
+	if(n > size)
+	    return;
         
 	int pos = 0; //0 = 0, -1 = L, 1 = R
 	String s = arr.get(n);
