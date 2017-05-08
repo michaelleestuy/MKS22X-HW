@@ -15,6 +15,10 @@ public class MyHeap{
 	    konstans = -1;
     }
 
+    public int size(){
+	return size;
+    }
+
     public MyHeap(){
 	size = 0;
 	konstans = 1;
