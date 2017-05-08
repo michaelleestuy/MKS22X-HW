@@ -5,9 +5,19 @@ public class MyHeap{
     private ArrayList<String> arr;
     private int konstans;
 
+    public MyHeap(boolean b){
+	size = 0;
+	arr = new ArrayList<String>();
+	arr.add("lmao");
+	if(b == true)
+	    konstans = 1;
+	if(b == false)
+	    konstans = -1;
+    }
+
     public MyHeap(){
 	size = 0;
-	konstans = -1;
+	konstans = 1;
 	arr = new ArrayList<String>();
 	arr.add("lmao");
     }
@@ -57,11 +67,11 @@ public class MyHeap{
 
 	int pos = 0; //0 = 0, -1 = L, 1 = R
 	String s = arr.get(n);
-	if(hasLChild(n) && s.compareTo(LChild(n)) > 0){
+	if(hasLChild(n) && s.compareTo(LChild(n)) * konstans < 0){
 	    pos = -1;
 	    s = LChild(n);
 	}
-	if(hasRChild(n) && s.compareTo(RChild(n)) > 0){
+	if(hasRChild(n) && s.compareTo(RChild(n)) * konstans < 0){
 	    pos = 1;
 	    s = RChild(n);
 	}
@@ -115,7 +125,7 @@ public class MyHeap{
     }
 
     public static void main(String[]args){
-	MyHeap a = new MyHeap();
+	MyHeap a = new MyHeap(false);
 	a.add("a");
 	a.add("e");
 	a.add("g");
