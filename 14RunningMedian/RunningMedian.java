@@ -51,7 +51,7 @@ public class RunningMedian{
 	double curr = getMedian();
 	if(a > curr){
 	    RMin.add(a);
-	    if(RSize - LSize == 2){
+	    if(RSize - LSize >= 1){
 		LMax.add(RMin.remove());
 	    }
 	    LSize = LMax.size();
@@ -60,7 +60,7 @@ public class RunningMedian{
 
 	else{
 	    LMax.add(a);
-	    if(LSize - RSize == 2){
+	    if(LSize - RSize >= 1){
 		RMin.add(LMax.remove());
 	    }
 	    LSize = LMax.size();
