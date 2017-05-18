@@ -29,7 +29,16 @@ public class Location implements Comparable<Location>{
 	return distanceToGoal;
     }
 
+    public int getR(){
+	return row;
+    }
+    public int getC(){
+	return col;
+    }
 
+    public int getDistance(Location l){
+	return Math.abs(l.getR() - getR()) + Math.abs(l.getC() - getC());
+    }
 
 
 
