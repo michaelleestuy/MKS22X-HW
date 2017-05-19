@@ -40,8 +40,13 @@ public class MazeSolver{
     }
 
     public void solve(boolean b){
-
+	
     }
-
+    public void solveTop(){
+	Location l = front.next();
+	r = l.getR();
+	c = l.getC();
+	
+    }
 
 }

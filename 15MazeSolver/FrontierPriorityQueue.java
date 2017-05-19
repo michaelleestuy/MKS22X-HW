@@ -13,7 +13,7 @@ public class FrontierPriorityQueue implements Frontier{
     public FrontierPriorityQueue(boolean b){
 	size = 0;
 	arr = new ArrayList<Location>();
-	arr.add(new Location(99, 99, 99, 99, false));
+	arr.add(new Location(99, 99, null, 99, 99, false));
 	if(b == true)
 	    konstans = 1;
 	if(b == false)
@@ -24,7 +24,7 @@ public class FrontierPriorityQueue implements Frontier{
 	size = 0;
 	konstans = 1;
 	arr = new ArrayList<Location>();
-	arr.add(new Location(99, 99, 99, 99, false));
+	arr.add(new Location(99, 99, null, 99, 99, false));
     }
     
     public Location peek(){

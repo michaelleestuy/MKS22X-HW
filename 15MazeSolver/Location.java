@@ -4,9 +4,10 @@ public class Location implements Comparable<Location>{
     private boolean aStar;
     
     
-    public Location(int r, int c, int distToStart, int distToGoal, boolean aStarr){
+    public Location(int r, int c, Location prev, int distToStart, int distToGoal, boolean aStarr){
 	row = r;
 	col = c;
+	previous = prev;
 	distanceToStart = distToStart;
 	distanceToGoal = distToGoal;
 	aStar = aStarr;
