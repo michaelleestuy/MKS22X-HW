@@ -40,8 +40,34 @@ public class MazeSolver{
     }
 
     public void solve(boolean b){
-
+	
     }
 
+    private char whatIs(int r, int c, int dir){
+	if(dir == 0)
+	    return board.get(r - 1, c);
+	if(dir == 1)
+	    return board.get(r, c + 1);
+	if(dir == 2)
+	    return board.get(r + 1, c);
+	if(dir == 3)
+	    return board.get(r, c - 1);
+	else
+	    return '?';
+    }
+    
+    public void solveTop(){
+	Location l = front.next();
+	if(isEnd(l)){
+	    return;
+	}
+	r = l.getR();
+	c = l.getC();
+	board.set(r, c, '@')
+    }
+    
+    public boolean isEnd(Location l){
+	return l.getR() == board.getEnd().getR() && l.getC() == board.getEnd().getC();
+    }
 
-}
+    
