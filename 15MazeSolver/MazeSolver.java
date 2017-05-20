@@ -58,10 +58,12 @@ public class MazeSolver{
     public void solve(Location l){
 	int r = l.getR();
 	int c = l.getC();
-	if(solved)
+	if(solved){
 	    return;
+	}
 	if(board.get(r, c) == 'E'){
 	    solved = true;
+	    sweep(l);
 	    return;
 	}
 	else{
@@ -75,16 +77,16 @@ public class MazeSolver{
 	int r = l.getR();
 	int c = l.getC();
 	if(board.get(r + 1, c) == ' ' || board.get(r + 1, c) == 'E'){
-	    front.add(board.getLocation(r + 1, c, false));
+	    front.add(board.getLocation(r + 1, c, false, l));
 	}
 	if(board.get(r - 1, c) == ' ' || board.get(r - 1, c) == 'E'){
-	    front.add(board.getLocation(r - 1, c, false));
+	    front.add(board.getLocation(r - 1, c, false, l));
 	}
 	if(board.get(r, c + 1) == ' ' || board.get(r, c + 1) == 'E'){
-	    front.add(board.getLocation(r, c + 1, false));
+	    front.add(board.getLocation(r, c + 1, false, l));
 	}
 	if(board.get(r, c - 1) == ' ' || board.get(r, c - 1) == 'E'){
-	    front.add(board.getLocation(r, c - 1, false));
+	    front.add(board.getLocation(r, c - 1, false, l));
 	}
     }
 
@@ -93,6 +95,17 @@ public class MazeSolver{
     public boolean isEnd(Location l){
 	return l.getR() == board.getEnd().getR() && l.getC() == board.getEnd().getC();
     }
+
+    public void sweep(Location l){
+	int r = l.getR();
+	int c = l.getC();
+	board.set(r, c, '@');
+	if(l.getPrev() != null){
+	    sweep(l.getPrev());
+	}
+    }
+
+    
 
 
     public static void main(String[]args){

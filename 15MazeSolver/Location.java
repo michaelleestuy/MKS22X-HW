@@ -3,6 +3,9 @@ public class Location implements Comparable<Location>{
     private Location previous;
     private boolean aStar;
     
+    public Location getPrev(){
+	return previous;
+    }
     
     public Location(int r, int c, Location prev, int distToStart, int distToGoal, boolean aStarr){
 	row = r;

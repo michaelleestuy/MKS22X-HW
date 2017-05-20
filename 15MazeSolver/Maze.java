@@ -100,10 +100,10 @@ public class Maze{
 	start = new Location(startr,startc,null,0,d,false);
     }
 
-    public Location getLocation(int r, int c, boolean astar){
+    public Location getLocation(int r, int c, boolean astar, Location prev){
 	Location a = new Location(r,
 				  c,
-				  null,
+				  prev,
 				  Math.abs(r - start.getR()) + Math.abs(c - start.getC()),
 				  Math.abs(r - end.getR()) + Math.abs(c - end.getC()),
 				  astar);
