@@ -52,10 +52,10 @@ public class MazeSolver{
 	int ce = board.getEnd().getC();
 	board.set(rs, cs, 'S');
 	board.set(re, ce, 'E');
-	solve(board.getStart());
+	solve(board.getStart(), b);
     }
 
-    public void solve(Location l){
+    public void solve(Location l, boolean b){
 	int r = l.getR();
 	int c = l.getC();
 	if(solved){
@@ -68,25 +68,25 @@ public class MazeSolver{
 	}
 	else{
 	    board.set(r, c, '.');
-	    getSurrounding(l);
-	    solve(front.next());
+	    getSurrounding(l, b);
+	    solve(front.next(),  b);
 	}
     }
 
-    public void getSurrounding(Location l){
+    public void getSurrounding(Location l, boolean b){
 	int r = l.getR();
 	int c = l.getC();
 	if(board.get(r + 1, c) == ' ' || board.get(r + 1, c) == 'E'){
-	    front.add(board.getLocation(r + 1, c, false, l));
+	    front.add(board.getLocation(r + 1, c, b, l));
 	}
 	if(board.get(r - 1, c) == ' ' || board.get(r - 1, c) == 'E'){
-	    front.add(board.getLocation(r - 1, c, false, l));
+	    front.add(board.getLocation(r - 1, c, b, l));
 	}
 	if(board.get(r, c + 1) == ' ' || board.get(r, c + 1) == 'E'){
-	    front.add(board.getLocation(r, c + 1, false, l));
+	    front.add(board.getLocation(r, c + 1, b, l));
 	}
 	if(board.get(r, c - 1) == ' ' || board.get(r, c - 1) == 'E'){
-	    front.add(board.getLocation(r, c - 1, false, l));
+	    front.add(board.getLocation(r, c - 1, b, l));
 	}
     }
 
@@ -112,7 +112,7 @@ public class MazeSolver{
 	Maze m = new Maze("data3.dat");
 	System.out.println(m);
 	MazeSolver mm = new MazeSolver("data3.dat");
-	mm.solve();
+	mm.solve(1);
 	System.out.println(mm);
     }
     
