@@ -2,14 +2,20 @@ public class MazeSolver{
     private Maze board;
     private boolean ani;
     private Frontier front;
+    private boolean solved;
     
     public MazeSolver(String filename){
 	this(filename, false);
     }
 
+    public String toString(){
+	return board.toString();
+    }
+
     public MazeSolver(String filename, boolean animate){
 	ani = animate;
 	board = new Maze(filename);
+	solved = false;
     }
     //0-depth first
     //1-breadth first
@@ -40,34 +46,61 @@ public class MazeSolver{
     }
 
     public void solve(boolean b){
-	
+	int rs = board.getStart().getR();
+	int cs = board.getStart().getC();
+	int re = board.getEnd().getR();
+	int ce = board.getEnd().getC();
+	board.set(rs, cs, 'S');
+	board.set(re, ce, 'E');
+	solve(board.getStart());
     }
 
-    private char whatIs(int r, int c, int dir){
-	if(dir == 0)
-	    return board.get(r - 1, c);
-	if(dir == 1)
-	    return board.get(r, c + 1);
-	if(dir == 2)
-	    return board.get(r + 1, c);
-	if(dir == 3)
-	    return board.get(r, c - 1);
-	else
-	    return '?';
-    }
-    
-    public void solveTop(){
-	Location l = front.next();
-	if(isEnd(l)){
+    public void solve(Location l){
+	int r = l.getR();
+	int c = l.getC();
+	if(solved)
+	    return;
+	if(board.get(r, c) == 'E'){
+	    solved = true;
 	    return;
 	}
-	r = l.getR();
-	c = l.getC();
-	board.set(r, c, '@')
+	else{
+	    board.set(r, c, '.');
+	    getSurrounding(l);
+	    solve(front.next());
+	}
     }
+
+    public void getSurrounding(Location l){
+	int r = l.getR();
+	int c = l.getC();
+	if(board.get(r + 1, c) == ' ' || board.get(r + 1, c) == 'E'){
+	    front.add(board.getLocation(r + 1, c, false));
+	}
+	if(board.get(r - 1, c) == ' ' || board.get(r - 1, c) == 'E'){
+	    front.add(board.getLocation(r - 1, c, false));
+	}
+	if(board.get(r, c + 1) == ' ' || board.get(r, c + 1) == 'E'){
+	    front.add(board.getLocation(r, c + 1, false));
+	}
+	if(board.get(r, c - 1) == ' ' || board.get(r, c - 1) == 'E'){
+	    front.add(board.getLocation(r, c - 1, false));
+	}
+    }
+
+
     
     public boolean isEnd(Location l){
 	return l.getR() == board.getEnd().getR() && l.getC() == board.getEnd().getC();
     }
 
+
+    public static void main(String[]args){
+	Maze m = new Maze("data3.dat");
+	System.out.println(m);
+	MazeSolver mm = new MazeSolver("data3.dat");
+	mm.solve();
+	System.out.println(mm);
+    }
     
+}    
