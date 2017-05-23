@@ -68,8 +68,10 @@ public class MazeSolver{
 	}
 	else{
 	    board.set(r, c, '.');
-	    System.out.println("\033[2J");
 	    System.out.println(board);
+	    try{Thread.sleep(15);}
+	    catch(InterruptedException e){}
+	    System.out.println("\033[2J");
 	    getSurrounding(l, b);
 	    solve(front.next(),  b);
 	}
@@ -114,7 +116,7 @@ public class MazeSolver{
 	Maze m = new Maze("data3.dat");
 	System.out.println(m);
 	MazeSolver mm = new MazeSolver("data3.dat");
-	mm.solve(1);
+	mm.solve(4);
 	System.out.println(mm);
     }
     
