@@ -68,6 +68,8 @@ public class MazeSolver{
 	}
 	else{
 	    board.set(r, c, '.');
+	    System.out.println("\033[2J");
+	    System.out.println(board);
 	    getSurrounding(l, b);
 	    solve(front.next(),  b);
 	}
