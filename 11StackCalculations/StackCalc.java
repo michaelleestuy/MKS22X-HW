@@ -35,12 +35,11 @@ public class StackCalc{
     }
 
     private static boolean isO(String s){
-	char a = s.charAt(0);
-	return a == '*' ||
-	    a == '+' ||
-	    a == '-' ||
-	    a == '/' ||
-	    a == '%';
+	return s.equals("*") ||
+	    s.equals("+") ||
+	    s.equals("-") ||
+	    s.equals("/") ||
+	    s.equals("%");
     }
     public static void main(String[]args){
 	System.out.println(eval("10 28 24 4 / % *"));
