@@ -72,6 +72,10 @@ public class MazeSolver{
 	}
 	else{
 	    board.set(r, c, '.');
+	    System.out.println(board);
+	    try{Thread.sleep(15);}
+	    catch(InterruptedException e){}
+	    System.out.println("\033[2J");
 	    getSurrounding(l, b);
 	    solve(front.next(),  b);
 	}
@@ -115,8 +119,13 @@ public class MazeSolver{
     public static void main(String[]args){
 	Maze m = new Maze("data3.dat");
 	System.out.println(m);
+<<<<<<< HEAD
 	MazeSolver mm = new MazeSolver("data3.dat", true);
 	mm.solve(1);
+=======
+	MazeSolver mm = new MazeSolver("data3.dat");
+	mm.solve(4);
+>>>>>>> 322523bfff9a0639f1d5142abeca02c28014a8c6
 	System.out.println(mm);
     }
     
