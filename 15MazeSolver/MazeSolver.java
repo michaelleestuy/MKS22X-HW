@@ -56,7 +56,11 @@ public class MazeSolver{
     }
 
     public void solve(Location l, boolean b){
-	int r = l.getR();
+	if(ani){
+	    System.out.println("\033[2J");
+	    System.out.println(this);
+	}
+	    int r = l.getR();
 	int c = l.getC();
 	if(solved){
 	    return;
@@ -111,7 +115,7 @@ public class MazeSolver{
     public static void main(String[]args){
 	Maze m = new Maze("data3.dat");
 	System.out.println(m);
-	MazeSolver mm = new MazeSolver("data3.dat");
+	MazeSolver mm = new MazeSolver("data3.dat", true);
 	mm.solve(1);
 	System.out.println(mm);
     }
